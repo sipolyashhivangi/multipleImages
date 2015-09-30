@@ -1,0 +1,34 @@
+<html ng-app="app">
+<head>
+<script>
+app =angular.module("app",['LocalStorageModule']);
+app= angular.controller("ctrl", function($scope, $http, localStorageService)
+{
+	$scope.name="admin";
+	$scope.url = 'doLogin.php';
+	$scope.submitloginForm= function()
+	{
+		var responseData = $http.post($scope.url,{ 'name': $scope.name});
+		
+		responseData.success(function(data, status, headers, config) {
+			 $window.sessionStorage.token = data;
+			
+		});
+		responseData.error(function(data, status, headers, config) {
+			alert('error');
+		});
+	};
+	
+
+});
+
+</script>
+</head>
+<body ng-controller="ctrl">
+	<form name="form">
+		Name : <input type="text" ng-model="form.name"/>
+
+		<button   ng-click="submitloginForm()" >Save</button>
+	</form>
+</body>
+</html>

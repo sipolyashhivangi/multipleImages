@@ -1,0 +1,66 @@
+ <h2>User Listing</h2>
+ <form class="form-inline">
+        <div class="form-group">
+            <label >Search</label>
+            <input type="text" ng-model="search.name" class="form-control" placeholder="Search">
+        </div>
+    </form>
+
+
+<div ng-controller="studentController" id="main">
+<table  id="keywords" cellspacing="0" cellpadding="0" border='1'>
+	<tr>
+     <th><a href="" ng-click="reverse=!reverse;order('id', reverse)">ID</a></th>
+        <th>Name<a href="" ng-click="order('name',false)">v</a>
+        <a href="" ng-click="order('-name',false)">^</a></th>
+		<th>Email</th>
+		<th><a href="" ng-click="reverse=!reverse;order('contactno', reverse)">Phone Number</a></th>
+		
+		<th>Country</th>
+		<th>State</th>
+		<th>city</th>
+		<th>image</th>
+		<th>action</th>
+	</tr>
+   
+    <tr dir-paginate="data in lists |orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+    <td>{{ data.id }}</td>
+      <td class="lalign">{{ data.name }}</td>
+      <td>{{ data.email }}</td>
+	  <td>{{  data.contactno }}</td>
+	  <td>{{  data.country }}</td>
+	  <td>{{  data.state }}</td>
+	  <td>{{  data.city }}</td>
+	   <td>{{data.file}}<img src="http://172.16.10.22/~ssipolya/Angular Js/programs/curdByShivangi/img/{{data.file}}">
+					</td>
+	 
+							
+	  <td><a href='#/edit' ng-click='prod_edit(data.id )'>Edit</a> | <a href="" ng-click='prod_delete(data.id)'>Delete</a></td>
+   </tr>
+  
+</table>
+<dir-pagination-controls
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" >
+    </dir-pagination-controls>
+ <div class="pagination-div" ng-show="list.length">
+
+
+</div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $('#keywords').tablesorter(); 
+});
+</script>
+<style>
+.sort-icon {
+    font-size: 9px;
+    margin-left: 5px;
+}
+
+th {
+    cursor:pointer;
+}
+</style>
